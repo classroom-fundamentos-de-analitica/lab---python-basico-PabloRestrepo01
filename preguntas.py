@@ -196,7 +196,7 @@ def pregunta_05():
     for i in range(1, len(timesheet)):
         encontrado = False
         for j in range(len(resultado)):
-            if resultado[j][0] == resultado[0]:
+            if timesheet[i][0] == resultado[j][0]:
                 if int(timesheet[i][1]) > resultado[j][1]:
                     resultado[j][1] = int(timesheet[i][1])
                 elif int(timesheet[i][1]) < resultado[j][2]:
@@ -205,6 +205,7 @@ def pregunta_05():
                 break
         
         if not encontrado:
+            print(timesheet[i][0])
             resultado.append([timesheet[i][0], int(timesheet[i][1]), int(timesheet[i][1])])
 
     resultado = [tuple(x) for x in resultado]
