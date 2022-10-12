@@ -13,6 +13,9 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
+from turtle import width
+
+
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
@@ -21,10 +24,20 @@ def pregunta_01():
     214
 
     """
-    return
+    suma = 0
+    width open("data.csv") as file:
+        for line in file:
+            line.replace('\n', '')
+            line.replace('\t', ',')
+        
+        suma += line.split()[1]
+    
+    
+    return suma
 
-
+'''
 def pregunta_02():
+    
     """
     Retorne la cantidad de registros por cada letra de la primera columna como la lista
     de tuplas (letra, cantidad), ordendas alfabéticamente.
@@ -258,3 +271,4 @@ def pregunta_12():
 
     """
     return
+'''
