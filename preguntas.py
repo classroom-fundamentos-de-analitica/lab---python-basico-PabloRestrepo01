@@ -183,8 +183,34 @@ def pregunta_05():
     ]
 
     """
-    return
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
+    resultado = []
+    resultado.append([timesheet[0][0], int(timesheet[0][1]), int(timesheet[0][1])])
 
+    for i in range(1, len(timesheet)):
+        encontrado = False
+        for j in range(len(resultado)):
+            if resultado[j][0] == timesheet[i][0]:
+                if int(timesheet[i][1]) > resultado[j][1]:
+                    resultado[j][1] = int(timesheet[i][1])
+                elif int(timesheet[i][1]) < resultado[j][2]:
+                    resultado[j][2] = int(timesheet[i][1])
+                encontrado = True
+                break
+        
+        if not encontrado:
+            resultado.append([timesheet[i][0], int(timesheet[i][1]), int(timesheet[i][1])])
+
+    resultado = [tuple(x) for x in resultado]
+    resultado.sort()
+    return resultado
+print(pregunta_05())
 
 def pregunta_06():
     """
