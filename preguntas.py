@@ -29,10 +29,11 @@ def pregunta_01():
         timesheet = file.readlines()
     
     timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
     timesheet = [row.split(',') for row in timesheet]
     
     suma = 0
-    
+
     for i in range(len(timesheet)):
         suma += int(timesheet[i][1])    
 
