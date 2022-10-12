@@ -13,7 +13,7 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 """
 
 
-from turtle import width
+from time import time
 
 
 def pregunta_01():
@@ -24,18 +24,20 @@ def pregunta_01():
     214
 
     """
+    
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
     suma = 0
-    width open("data.csv") as file:
-        for line in file:
-            line.replace('\n', '')
-            line.replace('\t', ',')
-        
-        suma += line.split()[1]
     
-    
+    for i in range(len(timesheet)):
+        suma += timesheet[1]    
+
     return suma
 
-'''
 def pregunta_02():
     
     """
@@ -271,4 +273,3 @@ def pregunta_12():
 
     """
     return
-'''
