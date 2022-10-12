@@ -34,7 +34,7 @@ def pregunta_01():
     suma = 0
     
     for i in range(len(timesheet)):
-        suma += timesheet[i][1]    
+        suma += int(timesheet[i][1])    
 
     return suma
 
