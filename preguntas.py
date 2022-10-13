@@ -392,8 +392,8 @@ def pregunta_09():
     timesheet = [row.replace('\t', ',') for row in timesheet]
     timesheet = [row.split(',') for row in timesheet]
     
-    resultado = []
-    resultado.append([timesheet[0][4].split(':')[0], 1])
+    resultado = {}
+    resultado[timesheet[0][4].split(':')[0]] = 1
 
     for i in range(len(timesheet)):
         registro = timesheet[i][4].split(':')
@@ -402,18 +402,21 @@ def pregunta_09():
             inicio = 2
         for k in range(inicio, len(registro), 2):
             encontrado = False
-            for j in range(len(resultado)):
-                if resultado[j][0] == registro[k]:
-                    resultado[j][1] += 1
+            for j in resultado:
+                if j == registro[k]:
+                    resultado[j] += 1
                     encontrado = True
                     break
         
             if not encontrado:
-                resultado.append([registro[k], 1])
-
-    resultado = [tuple(x) for x in resultado]
-    resultado.sort()
-    return resultado
+                resultado[registro[k]] = 1
+    resultado1 = sorted(resultado)
+    resultado2 = {}
+    
+    for i in resultado1:
+        resultado2[i] = resultado[i]
+    return resultado2
+print(pregunta_09())
 
 def pregunta_10():
     """
