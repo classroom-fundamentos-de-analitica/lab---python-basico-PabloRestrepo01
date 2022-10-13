@@ -505,7 +505,6 @@ def pregunta_11():
     
     return resultado1
 
-print(pregunta_11())
 def pregunta_12():
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
@@ -521,4 +520,41 @@ def pregunta_12():
     }
 
     """
-    return
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace(',', ':') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
+    resultado = []
+    resultado.append([timesheet[0][0], int(timesheet[0][4].split(':')[1])])
+    
+    for i in range(len(timesheet)):
+        columna5 = timesheet[i][4].split(':')
+        inicio = 1
+        
+        if i == 0:
+            inicio = 3
+                    
+        for k in range(inicio, len(columna5), 2):
+            encontrado = False
+
+            for j in range(len(resultado)):
+                if resultado[j][0] == timesheet[i][0]:
+                    resultado[j][1] += int(columna5[k])
+                    encontrado = True
+                    break
+        
+            if not encontrado:
+                resultado.append([timesheet[i][0], int(columna5[k])])
+    
+    resultado.sort()
+    resultado1 = {}
+    
+    for i in resultado:
+        resultado1[i[0]] = i[1]
+    
+    return resultado1
+print(pregunta_12())
