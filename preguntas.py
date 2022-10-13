@@ -353,8 +353,8 @@ def pregunta_08():
             if resultado[j][0] == int(timesheet[i][1]):
                 if timesheet[i][0] not in resultado[j][1]:
                     resultado[j][1].append(timesheet[i][0])
-                    encontrado = True
-                    break
+                encontrado = True
+                break
         
         if not encontrado:
             resultado.append([int(timesheet[i][1]), [timesheet[i][0]]])
