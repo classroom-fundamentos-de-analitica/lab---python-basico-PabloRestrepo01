@@ -314,6 +314,7 @@ def pregunta_07():
     resultado = [tuple(x) for x in resultado]
     resultado.sort()
     return resultado
+print(pregunta_07())
 
 def pregunta_08():
     """
