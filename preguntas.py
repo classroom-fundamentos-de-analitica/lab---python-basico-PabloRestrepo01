@@ -449,7 +449,6 @@ def pregunta_10():
         resultado.append((timesheet[i][0], len(timesheet[i][3].split('-')), len(timesheet[i][4].split('-'))))
 
     return resultado
-print(pregunta_10())
 
 def pregunta_11():
     """
@@ -469,9 +468,44 @@ def pregunta_11():
 
 
     """
-    return
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace(',', '-') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
+    resultado = []
+    resultado.append([timesheet[0][3].split('-')[0], int(timesheet[0][1])])
+    
+    for i in range(len(timesheet)):
+        columna4 = timesheet[i][3].split('-')
+        inicio = 0
+        if i == 0:
+            inicio = 1
+                    
+        for k in range(inicio, len(columna4)):
+            encontrado = False
+            
+            for j in range(len(resultado)):
+                if resultado[j][0] == columna4[k]:
+                    resultado[j][1] += int(timesheet[i][1])
+                    encontrado = True
+                    break
+        
+            if not encontrado:
+                resultado.append([columna4[k], int(timesheet[i][1])])
+    
+    resultado.sort()
+    resultado1 = {}
+    
+    for i in resultado:
+        resultado1[i[0]] = i[1]
+    
+    return resultado1
 
-
+print(pregunta_11())
 def pregunta_12():
     """
     Genere un diccionario que contengan como clave la columna 1 y como valor la suma de
