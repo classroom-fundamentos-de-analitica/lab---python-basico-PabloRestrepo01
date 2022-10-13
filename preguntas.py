@@ -416,7 +416,6 @@ def pregunta_09():
     for i in resultado1:
         resultado2[i] = resultado[i]
     return resultado2
-print(pregunta_09())
 
 def pregunta_10():
     """
@@ -436,8 +435,21 @@ def pregunta_10():
 
 
     """
-    return
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace(',', '-') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
+    resultado = []
 
+    for i in range(len(timesheet)):
+        resultado.append((timesheet[i][0], len(timesheet[i][3].split('-')), len(timesheet[i][4].split('-'))))
+
+    return resultado
+print(pregunta_10())
 
 def pregunta_11():
     """
