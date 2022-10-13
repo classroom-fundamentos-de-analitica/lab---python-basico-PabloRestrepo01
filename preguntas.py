@@ -314,7 +314,6 @@ def pregunta_07():
     resultado = [tuple(x) for x in resultado]
     resultado.sort()
     return resultado
-print(pregunta_07())
 
 def pregunta_08():
     """
@@ -338,8 +337,33 @@ def pregunta_08():
     ]
 
     """
-    return
+    with open("data.csv", 'r') as file:
+        timesheet = file.readlines()
+    
+    timesheet = [row.replace('\n', '') for row in timesheet]
+    timesheet = [row.replace('\t', ',') for row in timesheet]
+    timesheet = [row.split(',') for row in timesheet]
+    
+    resultado = []
+    resultado.append([int(timesheet[0][1]), [timesheet[0][0]]])
 
+    for i in range(1, len(timesheet)):
+        encontrado = False
+        for j in range(len(resultado)):
+            if resultado[j][0] == int(timesheet[i][1]):
+                if timesheet[i][0] not in resultado[j][1]:
+                    resultado[j][1].append(timesheet[i][0])
+                    encontrado = True
+                    break
+        
+        if not encontrado:
+            resultado.append([int(timesheet[i][1]), [timesheet[i][0]]])
+
+    resultado = [[x[0], sorted(x[1])] for x in resultado]
+    resultado = [tuple(x) for x in resultado]
+    resultado.sort()
+    return resultado
+print(pregunta_08())
 
 def pregunta_09():
     """
