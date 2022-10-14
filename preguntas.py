@@ -11,11 +11,6 @@ Utilice el archivo `data.csv` para resolver las preguntas.
 
 
 """
-
-
-from datetime import datetime
-
-
 def pregunta_01():
     """
     Retorne la suma de la segunda columna.
